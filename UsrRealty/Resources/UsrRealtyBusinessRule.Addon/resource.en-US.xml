@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resources Culture="en-US">
+	<Group Type="String">
+		<Items>
+			<Item Name="AddonConfig.Rules.0c7bf093-1c9b-a0e7-8e3b-7a079c206a98.Caption" Value="Apply filter: Manager" />
+			<Item Name="AddonConfig.Rules.92333612-252c-682a-1603-4cf85000d95a.Caption" Value="Make elements required: Type" />
+			<Item Name="Caption" Value="Realty (Business rules)" />
+		</Items>
+	</Group>
+</Resources>

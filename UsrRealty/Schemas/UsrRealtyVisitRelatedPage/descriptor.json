@@ -1,0 +1,10 @@
+﻿{
+  "Descriptor": {
+    "UId": "c26ab051-b78f-4350-a8ea-fcb06261e3d8",
+    "Name": "UsrRealtyVisitRelatedPage",
+    "ModifiedOnUtc": "\/Date(1689864381000)\/",
+    "ManagerName": "AddonSchemaManager",
+    "Caption": "Realty Visit (FreedomUI) (Page settings)",
+    "DependsOn": []
+  }
+}
