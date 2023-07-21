@@ -51,6 +51,31 @@ define("UsrRealty_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function/**SCHE
 			},
 			{
 				"operation": "insert",
+				"name": "Button_1aqshb7",
+				"values": {
+					"type": "crt.Button",
+					"caption": "#ResourceString(Button_1aqshb7_caption)#",
+					"color": "primary",
+					"disabled": false,
+					"size": "medium",
+					"iconPosition": "only-text",
+					"visible": true,
+					"clicked": {
+						"request": "crt.RunBusinessProcessRequest",
+						"params": {
+							"processName": "UsrAddRealtyVisitsProcess",
+							"processRunType": "ForTheSelectedPage",
+							"recordIdProcessParameterName": "RealtyIdParameter"
+						}
+					},
+					"clickMode": "default"
+				},
+				"parentName": "CardToggleContainer",
+				"propertyName": "items",
+				"index": 0
+			},
+			{
+				"operation": "insert",
 				"name": "Button_PUSH",
 				"values": {
 					"type": "crt.Button",
@@ -67,7 +92,7 @@ define("UsrRealty_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function/**SCHE
 				},
 				"parentName": "CardToggleContainer",
 				"propertyName": "items",
-				"index": 0
+				"index": 1
 			},
 			{
 				"operation": "insert",
@@ -670,11 +695,29 @@ define("UsrRealty_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function/**SCHE
 				"NumberAttribute_78qaybj": {
 					"modelConfig": {
 						"path": "PDS.UsrPriceUSD"
+					},
+					"validators": {
+						"MySuperValidator": {
+							"type": "usr.DGValidator",
+							"params": {
+								"minValue": 30,
+								"message": "Price can not be less than 30.0"
+							}
+						}
 					}
 				},
 				"NumberAttribute_o2edzom": {
 					"modelConfig": {
 						"path": "PDS.UsrArea"
+					},
+					"validators": {
+						"MySuperValidator": {
+							"type": "usr.DGValidator",
+							"params": {
+								"minValue": 10,
+								"message": "Area can not be less than 10.0"
+							}
+						}
 					}
 				},
 				"LookupAttribute_691vgxl": {
@@ -842,6 +885,38 @@ define("UsrRealty_FormPage", /**SCHEMA_DEPS*/[]/**SCHEMA_DEPS*/, function/**SCHE
 
 		]/**SCHEMA_HANDLERS*/,
 		converters: /**SCHEMA_CONVERTERS*/{}/**SCHEMA_CONVERTERS*/,
-		validators: /**SCHEMA_VALIDATORS*/{}/**SCHEMA_VALIDATORS*/
+		validators: /**SCHEMA_VALIDATORS*/{
+			/* The validator type must contain a vendor prefix.
+			Format the validator type in PascalCase. */
+			"usr.DGValidator": {
+				validator: function (config) {
+					return function (control) {
+						let value = control.value;
+						let minValue = config.minValue;
+						let valueIsCorrect = value >= minValue;
+						var result;
+						if (valueIsCorrect) {
+							result = null;
+						} else {
+							result = {
+								"usr.DGValidator": { 
+									message: config.message
+								}
+							};
+						}
+						return result;
+					};
+				},
+				params: [
+					{
+						name: "minValue"
+					},
+					{
+						name: "message"
+					}
+				],
+				async: false
+			}
+		}/**SCHEMA_VALIDATORS*/
 	};
 });
