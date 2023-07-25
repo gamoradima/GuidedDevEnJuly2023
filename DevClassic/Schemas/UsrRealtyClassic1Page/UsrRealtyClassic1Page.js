@@ -1,7 +1,21 @@
 define("UsrRealtyClassic1Page", [], function() {
 	return {
 		entitySchemaName: "UsrRealtyClassic",
-		attributes: {},
+		attributes: {
+			"UsrCommissionUSD": {
+				dependencies: [
+					{
+						columns: ["UsrPriceUSD", "UsrOfferType"],
+						methodName: "calculateCommission"
+					}
+				]
+			},
+			"UsrOfferType": {
+				lookupListConfig: {
+					columns: ["UsrCommissionMultiplier"]
+				}
+			}
+		},
 		modules: /**SCHEMA_MODULES*/{}/**SCHEMA_MODULES*/,
 		details: /**SCHEMA_DETAILS*/{
 			"Files": {
@@ -11,10 +25,63 @@ define("UsrRealtyClassic1Page", [], function() {
 					"masterColumn": "Id",
 					"detailColumn": "UsrRealtyClassic"
 				}
+			},
+			"UsrSchema940be1abDetaildbd96e72": {
+				"schemaName": "UsrRealtyVisitClassicDetailGrid",
+				"entitySchemaName": "UsrRealtyVisitClassic",
+				"filter": {
+					"detailColumn": "UsrParentRealtyClassic",
+					"masterColumn": "Id"
+				}
 			}
 		}/**SCHEMA_DETAILS*/,
 		businessRules: /**SCHEMA_BUSINESS_RULES*/{}/**SCHEMA_BUSINESS_RULES*/,
-		methods: {},
+		methods: {
+			calculateCommission: function() {
+				var price = this.get("UsrPriceUSD");
+				if (!price) {
+					price = 0;
+				}
+				var offerTypeObject = this.get("UsrOfferType");
+				var coeff = 0;
+				if (offerTypeObject) {
+					coeff = offerTypeObject.UsrCommissionMultiplier;
+				}
+				var commission = price * coeff;
+				this.set("UsrCommissionUSD", commission);
+			},
+
+			onEntityInitialized: function() {
+				this.callParent(arguments);
+				this.calculateCommission();
+			},
+			onMyButtonClick: function() {
+				this.console.log("My button works fine.");
+				
+			},
+			getMyButtonEnabledFlag: function() {
+				var result = true;
+				var name = this.get("UsrName");
+				if (this.isAddMode() && !name) {
+					result = false;
+				}
+				return result;
+			},
+			positiveValueValidator: function(value, column) {
+				var msg = "";
+				if (value < 0) {
+					msg = this.get("Resources.Strings.ValueMustBeGreaterThanZero");
+				}
+				return {
+					invalidMessage: msg
+				};
+			},
+			setValidationConfig: function() {
+				this.callParent(arguments);
+				this.addColumnValidator("UsrPriceUSD", this.positiveValueValidator);
+				this.addColumnValidator("UsrArea", this.positiveValueValidator);
+			}
+		},
 		dataModels: /**SCHEMA_DATA_MODELS*/{}/**SCHEMA_DATA_MODELS*/,
 		diff: /**SCHEMA_DIFF*/[
 			{
@@ -73,6 +140,51 @@ define("UsrRealtyClassic1Page", [], function() {
 			},
 			{
 				"operation": "insert",
+				"name": "FLOAT6bb356b6-8104-47f4-945c-302700ec902b",
+				"values": {
+					"layout": {
+						"colSpan": 24,
+						"rowSpan": 1,
+						"column": 0,
+						"row": 3,
+						"layoutName": "ProfileContainer"
+					},
+					"bindTo": "UsrCommissionUSD",
+					"enabled": false
+				},
+				"parentName": "ProfileContainer",
+				"propertyName": "items",
+				"index": 3
+			},
+			{
+				"operation": "insert",
+				"name": "MyButton",
+				"values": {
+					"layout": {
+						"colSpan": 24,
+						"rowSpan": 1,
+						"column": 0,
+						"row": 4,
+						"layoutName": "ProfileContainer"
+					},
+					"itemType": 5,
+					"caption": {
+						"bindTo": "Resources.Strings.MyButtonCaption"
+					},
+					"click": {
+						"bindTo": "onMyButtonClick"
+					},
+					"enabled": {
+						"bindTo": "getMyButtonEnabledFlag"
+					},
+					"style": "green"
+				},
+				"parentName": "ProfileContainer",
+				"propertyName": "items",
+				"index": 4
+			},
+			{
+				"operation": "insert",
 				"name": "LOOKUP025937e1-0105-4c1a-9d76-eb8d1979333e",
 				"values": {
 					"layout": {
@@ -111,25 +223,6 @@ define("UsrRealtyClassic1Page", [], function() {
 			},
 			{
 				"operation": "insert",
-				"name": "LOOKUP456f884f-3a1f-401d-9570-bd6adfe6b0b8",
-				"values": {
-					"layout": {
-						"colSpan": 12,
-						"rowSpan": 1,
-						"column": 12,
-						"row": 1,
-						"layoutName": "Header"
-					},
-					"bindTo": "UsrManager",
-					"enabled": true,
-					"contentType": 5
-				},
-				"parentName": "Header",
-				"propertyName": "items",
-				"index": 2
-			},
-			{
-				"operation": "insert",
 				"name": "STRINGafba37ed-2b29-4d5b-b1e6-315468223983",
 				"values": {
 					"layout": {
@@ -145,7 +238,51 @@ define("UsrRealtyClassic1Page", [], function() {
 				},
 				"parentName": "Header",
 				"propertyName": "items",
+				"index": 2
+			},
+			{
+				"operation": "insert",
+				"name": "LOOKUP456f884f-3a1f-401d-9570-bd6adfe6b0b8",
+				"values": {
+					"layout": {
+						"colSpan": 12,
+						"rowSpan": 1,
+						"column": 12,
+						"row": 1,
+						"layoutName": "Header"
+					},
+					"bindTo": "UsrManager",
+					"enabled": true,
+					"contentType": 5
+				},
+				"parentName": "Header",
+				"propertyName": "items",
 				"index": 3
+			},
+			{
+				"operation": "insert",
+				"name": "Tab7c5840b7TabLabel",
+				"values": {
+					"caption": {
+						"bindTo": "Resources.Strings.Tab7c5840b7TabLabelTabCaption"
+					},
+					"items": [],
+					"order": 0
+				},
+				"parentName": "Tabs",
+				"propertyName": "tabs",
+				"index": 0
+			},
+			{
+				"operation": "insert",
+				"name": "UsrSchema940be1abDetaildbd96e72",
+				"values": {
+					"itemType": 2,
+					"markerValue": "added-detail"
+				},
+				"parentName": "Tab7c5840b7TabLabel",
+				"propertyName": "items",
+				"index": 0
 			},
 			{
 				"operation": "insert",
@@ -155,11 +292,11 @@ define("UsrRealtyClassic1Page", [], function() {
 						"bindTo": "Resources.Strings.NotesAndFilesTabCaption"
 					},
 					"items": [],
-					"order": 0
+					"order": 1
 				},
 				"parentName": "Tabs",
 				"propertyName": "tabs",
-				"index": 0
+				"index": 1
 			},
 			{
 				"operation": "insert",
@@ -217,7 +354,7 @@ define("UsrRealtyClassic1Page", [], function() {
 				"operation": "merge",
 				"name": "ESNTab",
 				"values": {
-					"order": 1
+					"order": 2
 				}
 			}
 		]/**SCHEMA_DIFF*/
