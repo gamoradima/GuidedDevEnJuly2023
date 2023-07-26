@@ -69,7 +69,33 @@
     "FB2": "d7c295d3-3146-4ee1-ac49-3a7bd0edc45d"
   }
 }
-~ MetaData.Schema.D2 ["ae0e45ca-c495-4fe7-a39d-3ab7278e1617","e80190a5-03b2-4095-90f7-a193a960adee","ebf6bb93-8aa6-4a01-900d-c6ea67affe21","9928edec-4272-425a-93bb-48743fee4b04","3015559e-cbc6-406a-88af-07f7930be832","3fabd836-6a53-4d8d-9069-6df88d9dae1e","72fdc8dd-e6f7-185d-c1a3-4e2753de7306","4e1e9542-449a-762e-898f-e9bfe30c3939","c82f3601-e400-5d2b-5073-e2d043b2f06e","0ca5c81a-4fd4-8f64-a6c1-5868c0baa1d1"]
++ MetaData.Schema.D2 {
+  "UId": "b4690faa-d127-4efb-b9e2-67f506de9584",
+  "A2": "UsrCountry",
+  "A3": "212731f6-77bc-456d-8f13-5a75e8a50b9a",
+  "A4": "212731f6-77bc-456d-8f13-5a75e8a50b9a",
+  "A5": "4e760251-3e47-43f4-9075-03047a982de9",
+  "S2": "b295071f-7ea9-4e62-8d1a-919bf3732ff2",
+  "S4": "09fce1f8-515c-4296-95cd-8cd93f79a6cf",
+  "E6": true,
+  "E20": true,
+  "E17": "UsrCountryId",
+  "E18": "UsrCountryName"
+}
++ MetaData.Schema.D2 {
+  "UId": "453b6d4b-53e5-4fb5-9a97-936a7384f749",
+  "A2": "UsrCity",
+  "A3": "212731f6-77bc-456d-8f13-5a75e8a50b9a",
+  "A4": "212731f6-77bc-456d-8f13-5a75e8a50b9a",
+  "A5": "4e760251-3e47-43f4-9075-03047a982de9",
+  "S2": "b295071f-7ea9-4e62-8d1a-919bf3732ff2",
+  "S4": "5ca90b6a-93e7-4448-befe-ab5166ec2cfe",
+  "E6": true,
+  "E20": true,
+  "E17": "UsrCityId",
+  "E18": "UsrCityName"
+}
+~ MetaData.Schema.D2 ["ae0e45ca-c495-4fe7-a39d-3ab7278e1617","e80190a5-03b2-4095-90f7-a193a960adee","ebf6bb93-8aa6-4a01-900d-c6ea67affe21","9928edec-4272-425a-93bb-48743fee4b04","3015559e-cbc6-406a-88af-07f7930be832","3fabd836-6a53-4d8d-9069-6df88d9dae1e","72fdc8dd-e6f7-185d-c1a3-4e2753de7306","4e1e9542-449a-762e-898f-e9bfe30c3939","c82f3601-e400-5d2b-5073-e2d043b2f06e","0ca5c81a-4fd4-8f64-a6c1-5868c0baa1d1","b4690faa-d127-4efb-b9e2-67f506de9584","453b6d4b-53e5-4fb5-9a97-936a7384f749"]
 = MetaData.Schema.D20.A2 "UsrRealtyVisitClassicEvents"
 = MetaData.Schema.D36.A3 "212731f6-77bc-456d-8f13-5a75e8a50b9a"
 = MetaData.Schema.D36.BS1 false

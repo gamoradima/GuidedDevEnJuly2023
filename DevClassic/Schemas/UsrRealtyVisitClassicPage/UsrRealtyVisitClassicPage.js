@@ -4,7 +4,22 @@ define("UsrRealtyVisitClassicPage", [], function() {
 		attributes: {},
 		modules: /**SCHEMA_MODULES*/{}/**SCHEMA_MODULES*/,
 		details: /**SCHEMA_DETAILS*/{}/**SCHEMA_DETAILS*/,
-		businessRules: /**SCHEMA_BUSINESS_RULES*/{}/**SCHEMA_BUSINESS_RULES*/,
+		businessRules: /**SCHEMA_BUSINESS_RULES*/{
+			"UsrCity": {
+				"cc0a6b8e-5c5a-4aa3-b9a5-b2f6b9f0d042": {
+					"uId": "cc0a6b8e-5c5a-4aa3-b9a5-b2f6b9f0d042",
+					"enabled": true,
+					"removed": false,
+					"ruleType": 1,
+					"baseAttributePatch": "Country",
+					"comparisonType": 3,
+					"autoClean": true,
+					"autocomplete": true,
+					"type": 1,
+					"attribute": "UsrCountry"
+				}
+			}
+		}/**SCHEMA_BUSINESS_RULES*/,
 		methods: {},
 		dataModels: /**SCHEMA_DATA_MODELS*/{}/**SCHEMA_DATA_MODELS*/,
 		diff: /**SCHEMA_DIFF*/[
@@ -59,6 +74,44 @@ define("UsrRealtyVisitClassicPage", [], function() {
 				"parentName": "Header",
 				"propertyName": "items",
 				"index": 2
+			},
+			{
+				"operation": "insert",
+				"name": "LOOKUPff7f736a-3d1e-4233-8a43-2aec60894eb7",
+				"values": {
+					"layout": {
+						"colSpan": 12,
+						"rowSpan": 1,
+						"column": 0,
+						"row": 2,
+						"layoutName": "Header"
+					},
+					"bindTo": "UsrCountry",
+					"enabled": true,
+					"contentType": 3
+				},
+				"parentName": "Header",
+				"propertyName": "items",
+				"index": 3
+			},
+			{
+				"operation": "insert",
+				"name": "LOOKUP83b97f2d-45bb-4bd4-b8e3-e63ef36116b7",
+				"values": {
+					"layout": {
+						"colSpan": 12,
+						"rowSpan": 1,
+						"column": 12,
+						"row": 2,
+						"layoutName": "Header"
+					},
+					"bindTo": "UsrCity",
+					"enabled": true,
+					"contentType": 3
+				},
+				"parentName": "Header",
+				"propertyName": "items",
+				"index": 4
 			}
 		]/**SCHEMA_DIFF*/
 	};
